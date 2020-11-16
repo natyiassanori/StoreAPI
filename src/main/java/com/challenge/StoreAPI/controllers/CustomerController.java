@@ -27,51 +27,77 @@ public class CustomerController {
 
 	@GetMapping("/all")
 	public List<Customer> listAllCustomers() {
+		
 		return customerService.listAll();
+		
 	}
 	
 	@GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable int id) {
+		
         try {
+        	
             Customer customer = customerService.get(id);
+            
             return new ResponseEntity<Customer>(customer, HttpStatus.OK);
+            
         } catch (NoSuchElementException e) {
+        	
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found");
+            
         }
     }
 	
 	@GetMapping("/name/{name}")
     public ResponseEntity<?> getCustomerByName(@PathVariable String name) {
         try {
+        	
             List<Customer> customers = customerService.getByName(name);
+            
             return new ResponseEntity<List<Customer>>(customers, HttpStatus.OK);
+            
         } catch (NoSuchElementException e) {
+        	
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer not found");
+            
         }
     }
 	
 	@PostMapping("/")
 	public ResponseEntity<String> createNewCustomer(@RequestBody Customer customer) {
+		
 		customerService.save(customer);
+		
 		return ResponseEntity.status(HttpStatus.OK).body("Customer successfully created");
+		
 	}
 	
 	@PutMapping("/{id}")
 	public ResponseEntity<String> updateCustomer(@RequestBody Customer customer, @PathVariable int id) {
+		
 		try {			
+			
 			Customer existCustomer = customerService.get(id);
+			
 			existCustomer.setName(customer.getName());
+			
 			customerService.save(existCustomer);			
+			
             return ResponseEntity.status(HttpStatus.OK).body("Customer successfully updated");
             
-        } catch (NoSuchElementException e) {       	
+        } catch (NoSuchElementException e) {     
+        	
         	return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Customer does not exist");
+        	
         }
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteCustomer(@PathVariable int id) {
+		
 		customerService.delete(id);
+		
 		return ResponseEntity.status(HttpStatus.OK).body("Customer deleted");
+		
 	}
 }
