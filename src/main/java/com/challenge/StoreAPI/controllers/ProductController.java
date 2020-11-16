@@ -64,6 +64,22 @@ public class ProductController {
         }
     }
 	
+	@GetMapping("/category/{category}")
+    public ResponseEntity<?> getProductByProductCategoryId(@PathVariable int category) {
+		
+        try {
+        	
+            List<Product> products = productService.getByProductCategoryId(category);
+            
+            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+            
+        } catch (NoSuchElementException e) {
+        	
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found");
+            
+        }
+    }
+	
 	@PostMapping("/")
 	public ResponseEntity<String> createNewProduct(@RequestBody Product product) {
 		
@@ -81,6 +97,10 @@ public class ProductController {
 			Product existProduct = productService.get(id);
 			
 			existProduct.setName(product.getName());
+			existProduct.setDescription(product.getDescription());
+			existProduct.setCreationDate(product.getCreationDate());
+			existProduct.setScore(product.getScore());
+			existProduct.setProductCategoryoId(product.getProductCategoryId());
 			
 			productService.save(existProduct);			
 			

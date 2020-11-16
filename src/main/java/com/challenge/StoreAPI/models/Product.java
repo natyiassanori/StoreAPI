@@ -24,19 +24,19 @@ public class Product {
 	
 	private float score;
 	
-	private ProductCategory productCategory;
+	private int productCategoryId;
 	
 	public Product() {
 		
 	}
 	
-	public Product(Integer productId, String name, String description, Date creationDate, float score, ProductCategory productCategory) {
+	public Product(Integer productId, String name, String description, Date creationDate, float score, int productCategoryId) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
 		this.creationDate = creationDate;
 		this.score = score;
-		this.productCategory = productCategory;
+		this.productCategoryId = productCategoryId;
 	}
 
 	public int getProductId() {
@@ -79,12 +79,12 @@ public class Product {
 		this.score = score;
 	}
 
-	public ProductCategory getProductCategory() {
-		return productCategory;
+	public int getProductCategoryId() {
+		return productCategoryId;
 	}
 
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
+	public void setProductCategoryoId(int productCategoryId) {
+		this.productCategoryId = productCategoryId;
 	}	
 	
 }

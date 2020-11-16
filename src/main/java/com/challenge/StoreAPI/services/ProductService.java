@@ -34,8 +34,8 @@ public class ProductService {
 		return productRepository.findByNameContaining(name);
 	}
 	
-	public List<Product> getByCategoryId(int categoryId) {
-		return productRepository.findByCategoryId(categoryId);
+	public List<Product> getByProductCategoryId(int productCategoryId) {
+		return productRepository.findByProductCategoryId(productCategoryId);
 	}
 	
 	public List<Product> findByScore(float score) {

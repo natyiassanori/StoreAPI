@@ -8,7 +8,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 
 	public List<Product> findByNameContaining(String name);
 	
-	public List<Product> findByCategoryId(int categoryId);
+	public List<Product> findByProductCategoryId(int productCategoryId);
 	
 	public List<Product> findByScore(float score);
 }
