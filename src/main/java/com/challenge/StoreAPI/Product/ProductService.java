@@ -1,4 +1,4 @@
-package com.challenge.StoreAPI.services;
+package com.challenge.StoreAPI.Product;
 
 import java.util.List;
 
@@ -6,9 +6,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.challenge.StoreAPI.models.Product;
-import com.challenge.StoreAPI.repositories.ProductRepository;
 
 @Service
 @Transactional
@@ -45,4 +42,5 @@ public class ProductService {
 	public void delete(int id) {
 		productRepository.deleteById(id);
 	}
+	
 }

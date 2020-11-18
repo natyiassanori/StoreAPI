@@ -1,4 +1,4 @@
-package com.challenge.StoreAPI.services;
+package com.challenge.StoreAPI.Customer;
 
 import java.util.List;
 
@@ -6,9 +6,6 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.challenge.StoreAPI.models.Customer;
-import com.challenge.StoreAPI.repositories.CustomerRepository;
 
 @Service
 @Transactional

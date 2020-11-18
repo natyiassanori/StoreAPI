@@ -1,4 +1,4 @@
-package com.challenge.StoreAPI.models;
+package com.challenge.StoreAPI.Product;
 
 import java.util.Date;
 

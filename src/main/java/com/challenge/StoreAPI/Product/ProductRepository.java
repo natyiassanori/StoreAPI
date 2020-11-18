@@ -1,7 +1,7 @@
-package com.challenge.StoreAPI.repositories;
+package com.challenge.StoreAPI.Product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.challenge.StoreAPI.models.Product;
+
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{

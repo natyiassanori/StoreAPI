@@ -325,4 +325,38 @@ INSERT INTO product (name, description, product_category_id, creation_date) VALU
 
 
 
+#Inserts in sale table
+
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 2), (SELECT customer_id FROM customer WHERE customer_id = 1), (SELECT product_id FROM product WHERE product_id = 1),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 1), (SELECT customer_id FROM customer WHERE customer_id = 2), (SELECT product_id FROM product WHERE product_id = 1),1);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 3), (SELECT customer_id FROM customer WHERE customer_id = 3), (SELECT product_id FROM product WHERE product_id = 1),3);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 35), (SELECT customer_id FROM customer WHERE customer_id = 2), (SELECT product_id FROM product WHERE product_id = 6),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 5), (SELECT customer_id FROM customer WHERE customer_id = 4), (SELECT product_id FROM product WHERE product_id = 6),0);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 1), (SELECT customer_id FROM customer WHERE customer_id = 5), (SELECT product_id FROM product WHERE product_id = 5),1);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 2), (SELECT customer_id FROM customer WHERE customer_id = 6), (SELECT product_id FROM product WHERE product_id = 5),3);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 78), (SELECT customer_id FROM customer WHERE customer_id = 5), (SELECT product_id FROM product WHERE product_id = 5),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 11), (SELECT customer_id FROM customer WHERE customer_id = 4), (SELECT product_id FROM product WHERE product_id = 5),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 10), (SELECT customer_id FROM customer WHERE customer_id = 7), (SELECT product_id FROM product WHERE product_id = 5),4);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 9), (SELECT customer_id FROM customer WHERE customer_id = 2), (SELECT product_id FROM product WHERE product_id = 5),4);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 5), (SELECT customer_id FROM customer WHERE customer_id = 1), (SELECT product_id FROM product WHERE product_id = 7),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 7), (SELECT customer_id FROM customer WHERE customer_id = 70), (SELECT product_id FROM product WHERE product_id = 8),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 6), (SELECT customer_id FROM customer WHERE customer_id = 5), (SELECT product_id FROM product WHERE product_id = 9),3);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 2), (SELECT customer_id FROM customer WHERE customer_id = 55), (SELECT product_id FROM product WHERE product_id = 22),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 4), (SELECT customer_id FROM customer WHERE customer_id = 22), (SELECT product_id FROM product WHERE product_id = 21),4);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 1), (SELECT customer_id FROM customer WHERE customer_id = 20), (SELECT product_id FROM product WHERE product_id = 20),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 3), (SELECT customer_id FROM customer WHERE customer_id = 64), (SELECT product_id FROM product WHERE product_id = 9),1);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 6), (SELECT customer_id FROM customer WHERE customer_id = 61), (SELECT product_id FROM product WHERE product_id = 8),0);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 4), (SELECT customer_id FROM customer WHERE customer_id = 91), (SELECT product_id FROM product WHERE product_id = 7),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 7), (SELECT customer_id FROM customer WHERE customer_id = 99), (SELECT product_id FROM product WHERE product_id = 6),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 8), (SELECT customer_id FROM customer WHERE customer_id = 77), (SELECT product_id FROM product WHERE product_id = 1),3);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 56), (SELECT customer_id FROM customer WHERE customer_id = 89), (SELECT product_id FROM product WHERE product_id = 4),5);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 88), (SELECT customer_id FROM customer WHERE customer_id = 69), (SELECT product_id FROM product WHERE product_id = 2),4);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 99), (SELECT customer_id FROM customer WHERE customer_id = 55), (SELECT product_id FROM product WHERE product_id = 2),1);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 77), (SELECT customer_id FROM customer WHERE customer_id = 33), (SELECT product_id FROM product WHERE product_id = 11),2);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 66), (SELECT customer_id FROM customer WHERE customer_id = 11), (SELECT product_id FROM product WHERE product_id = 12),0);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 55), (SELECT customer_id FROM customer WHERE customer_id = 10), (SELECT product_id FROM product WHERE product_id = 13),3);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 50), (SELECT customer_id FROM customer WHERE customer_id = 9), (SELECT product_id FROM product WHERE product_id = 17),1);
+INSERT INTO sale (seller_id, customer_id, product_id, evaluation) VALUES ((SELECT seller_id FROM seller WHERE seller_id = 40), (SELECT customer_id FROM customer WHERE customer_id = 8), (SELECT product_id FROM product WHERE product_id = 14),5);
+
+
 
