@@ -8,8 +8,6 @@ import javax.persistence.Id;
 
 public class ProductDto {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
 	
 	private String name;
