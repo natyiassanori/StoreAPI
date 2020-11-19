@@ -24,7 +24,7 @@ public class Product {
 	
 	private Date creationDate;
 	
-	private float score;
+	private double score;
 	
 	private int productCategoryId;
 	
@@ -73,11 +73,11 @@ public class Product {
 		this.creationDate = creationDate;
 	}
 
-	public float getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(float score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 

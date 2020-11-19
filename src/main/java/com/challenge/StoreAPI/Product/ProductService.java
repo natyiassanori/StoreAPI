@@ -7,6 +7,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.challenge.StoreAPI.NewsPerCategory.NewsPerProductCategoryService;
+import com.challenge.StoreAPI.Sale.SaleService;
+
 
 @Service
 @Transactional
@@ -14,6 +17,12 @@ public class ProductService {
 
 	@Autowired
 	private ProductRepository productRepository;
+	
+	@Autowired
+	private NewsPerProductCategoryService newsPerProductCategoryService;
+	
+	@Autowired 
+	private SaleService saleService;
 		
 	
 	public List<Product> listAll() {
@@ -43,5 +52,25 @@ public class ProductService {
 	public void delete(int id) {
 		productRepository.deleteById(id);
 	}	
+	
+	public void updateProductScores() {
+		
+		List<Product> products = productRepository.findAll();
+		
+		for (Product product : products) {
+			
+			double ratingAverageOverThePastTwelveMonths = saleService.calculateRatingAverageOverThePastTwelveMonthsByProductId(product.getProductId());
+			
+			double salesPerProductExistenceDays = saleService.calculateSalesByProductExistingDays(product.getProductId());
+			
+			int newsCountByProductCategory = newsPerProductCategoryService.getNewsCountByProductCategoryId(product.getProductCategoryId());
+			
+			product.setScore(ratingAverageOverThePastTwelveMonths + salesPerProductExistenceDays + newsCountByProductCategory); 
+			
+			productRepository.save(product);
+		}		
+		
+	}
+	
 	
 }

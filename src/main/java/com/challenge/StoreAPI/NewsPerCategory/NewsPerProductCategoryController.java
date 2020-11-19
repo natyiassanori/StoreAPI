@@ -21,7 +21,6 @@ public class NewsPerProductCategoryController {
     public ResponseEntity<?> updateNewsCountByProductCategory() {
 		
         try {
-        	System.out.println("OIIIIIII");
         	String newsOfDay = newsService.updateNewsByProductCategory();
         	
         	return ResponseEntity.status(HttpStatus.OK).body(newsOfDay);

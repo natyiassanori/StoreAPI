@@ -31,7 +31,16 @@ public class NewsPerProductCategoryService {
 	private ProductCategoryService productCategoryService;
 	
 	@Autowired
+	private ProductService productService;
+	
+	@Autowired
 	private NewsPerCategoryRepository newsPerCategoryRepository;
+	
+	public int getNewsCountByProductCategoryId(int productCategoryId) {
+		
+		return newsPerCategoryRepository.findByProductCategoryId(productCategoryId).getNewsCount();
+		
+	}
 	
 	public String updateNewsByProductCategory() {
 				
@@ -62,7 +71,7 @@ public class NewsPerProductCategoryService {
 					newsPerProductCategory = new NewsPerProductCategory(productCategory.getProductCategoryId(), Integer.parseInt(newsCount));
 				}
 				
-				newsPerCategoryRepository.save(newsPerProductCategory);			
+				newsPerCategoryRepository.save(newsPerProductCategory);	
 				
 			} catch (JsonMappingException e) {
 				e.printStackTrace();
@@ -71,9 +80,11 @@ public class NewsPerProductCategoryService {
 			}
 			
 			response.close(); 
-		}                  
+		}       
+		
+		productService.updateProductScores();
          
-         return "ok";
+        return "ok";
 	}
 	
 	private String buildURL(String productCategoryDescription) {

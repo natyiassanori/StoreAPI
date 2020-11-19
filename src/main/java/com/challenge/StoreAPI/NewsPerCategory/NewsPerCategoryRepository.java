@@ -9,4 +9,5 @@ public interface NewsPerCategoryRepository extends JpaRepository<NewsPerProductC
 	public boolean existsByProductCategoryId(int productCategoryId);
 	
 	public NewsPerProductCategory findByProductCategoryId(int productCategoryId);
+	
 }
