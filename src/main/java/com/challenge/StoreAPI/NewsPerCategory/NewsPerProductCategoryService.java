@@ -9,6 +9,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import com.challenge.StoreAPI.Product.ProductService;
@@ -41,6 +43,7 @@ public class NewsPerProductCategoryService {
 		return newsPerCategoryRepository.findByProductCategoryId(productCategoryId).getNewsCount();
 		
 	}
+	
 	
 	public String updateNewsByProductCategory() {
 				
