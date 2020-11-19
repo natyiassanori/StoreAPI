@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class NewsPerProductCategoryService {
 
 	private final String BASE_URL = "https://newsapi.org/v2/top-headlines";
-	private final String API_KEY = "e0d4e56650ee4ef69299d3ccb4f84061";
+	private final String API_KEY = "62f34c298f284cd7b99e201ca2eb3fec";
 	private final String COUNTRY = "us";
 		
 	@Autowired
@@ -60,18 +60,25 @@ public class NewsPerProductCategoryService {
 			JsonNode jsonNode;
 			
 			try {
-				jsonNode = objectMapper.readTree(value);
-				String newsCount = jsonNode.get("totalResults").asText();
 				
+				jsonNode = objectMapper.readTree(value);
+				
+				String newsCount = jsonNode.get("totalResults").asText();				
 				
 				NewsPerProductCategory newsPerProductCategory = null;
+				
 				boolean newsPerProductCategoryExists = newsPerCategoryRepository.existsByProductCategoryId(productCategory.getProductCategoryId());
 				
 				if(newsPerProductCategoryExists) {
+					
 					newsPerProductCategory = newsPerCategoryRepository.findByProductCategoryId(productCategory.getProductCategoryId());
+					
 					newsPerProductCategory.setNewsCount(Integer.parseInt(newsCount));
+					
 				} else {
+					
 					newsPerProductCategory = new NewsPerProductCategory(productCategory.getProductCategoryId(), Integer.parseInt(newsCount));
+					
 				}
 				
 				newsPerCategoryRepository.save(newsPerProductCategory);	
