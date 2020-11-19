@@ -52,4 +52,16 @@ public class SaleService {
 		return sumOfRating/salesByProductOverThePastTwelveMonths.size();			
 	}	
 	
+	public double calculateSalesByProductExistingDays(int productId) {
+		
+		List<Sale> salesByProduct = findByProductId(productId);
+		
+		Product product = productService.get(productId);
+	
+		long numberOfDaysTheProductExists = product.getDaysOfExistence();
+		
+		return salesByProduct.size()/numberOfDaysTheProductExists;	
+		
+	}
+	
 }

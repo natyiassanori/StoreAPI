@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.challenge.StoreAPI.Product.Product;
+import com.challenge.StoreAPI.Product.ProductService;
 import com.challenge.StoreAPI.Sale.Sale;
 import com.challenge.StoreAPI.Sale.SaleRepository;
 import com.challenge.StoreAPI.Sale.SaleService;
@@ -21,7 +23,10 @@ import com.challenge.StoreAPI.Sale.SaleService;
 public class SaleServiceTest {
 
 	@Mock
-	SaleRepository saleRepository;		
+	SaleRepository saleRepository;
+	
+	@Mock
+	ProductService productService;
 
 	@InjectMocks
 	SaleService saleService;
@@ -72,6 +77,61 @@ public class SaleServiceTest {
 		
 		
 		Assert.assertEquals(0, ratingAverageOfPastTwelveMonths, 0);
+		
+	}
+	
+	@Test
+	public void SalesByProductExistenceDaysShouldBeTwoIfSalesOfProductsIsFourAndProductExistenceDaysIsTwo() {
+				
+		Date today = new Date();
+		
+		Calendar yesterday = Calendar.getInstance();			
+		yesterday.add(Calendar.DAY_OF_YEAR, -1);		
+		Date dateOfYesterday = yesterday.getTime();
+		
+		List<Sale> salesOfSomeProduct = new ArrayList<Sale>();
+		
+		salesOfSomeProduct.add(new Sale(1,  1, 1, 5.0, today));
+		salesOfSomeProduct.add(new Sale(1,  1, 1, 4.0, today));
+		salesOfSomeProduct.add(new Sale(1,  1, 1, 3.0, today));
+		salesOfSomeProduct.add(new Sale(1,  1, 1, 3.0, today));
+		
+		Product product = new Product();
+		product.setName("Some Product");
+		product.setCreationDate(dateOfYesterday);
+		
+		Mockito.when(saleService.findByProductId(1)).thenReturn(salesOfSomeProduct);
+		Mockito.when(productService.get(1)).thenReturn(product);
+				
+		
+		double salesByProductExistenceDays = saleService.calculateSalesByProductExistingDays(1);		
+		
+		
+		Assert.assertEquals(2, salesByProductExistenceDays, 0);
+		
+	}
+	
+	@Test
+	public void SalesByProductExistenceDaysShouldBeZeroIfSalesOfProductsIsZeroAndProductExistenceDaysIsTwo() {
+						
+		Calendar yesterday = Calendar.getInstance();			
+		yesterday.add(Calendar.DAY_OF_YEAR, -1);		
+		Date dateOfYesterday = yesterday.getTime();
+		
+		List<Sale> salesOfSomeProduct = new ArrayList<Sale>();
+		
+		Product product = new Product();
+		product.setName("Some Product");
+		product.setCreationDate(dateOfYesterday);
+		
+		Mockito.when(saleService.findByProductId(1)).thenReturn(salesOfSomeProduct);
+		Mockito.when(productService.get(1)).thenReturn(product);
+				
+		
+		double salesByProductExistenceDays = saleService.calculateSalesByProductExistingDays(1);		
+		
+		
+		Assert.assertEquals(0, salesByProductExistenceDays, 0);
 		
 	}
 }
