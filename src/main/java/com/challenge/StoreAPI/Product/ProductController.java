@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Product.Models.ProductDto;
+import com.challenge.StoreAPI.Product.Models.ProductRanking;
 
 import java.util.Date;
 import java.util.List;
@@ -123,7 +124,9 @@ public class ProductController {
         	
             List<ProductDto> productDtos = productService.getByName(name);
             
-            return new ResponseEntity<List<ProductDto>>(productDtos, HttpStatus.OK);
+            ProductRanking productRanking = new ProductRanking(new Date(), name, productDtos);
+            
+            return new ResponseEntity<ProductRanking>(productRanking, HttpStatus.OK);
             
         } catch (NoSuchElementException e) {
         	
