@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.challenge.StoreAPI.Product.Models.Product;
@@ -82,7 +83,7 @@ public class ProductController {
         }
     }
 	
-	@PostMapping("/create/")
+	@PostMapping("/create")
 	public ResponseEntity<String> createNewProduct(@RequestBody ProductDto productdDto) {
 		
 		productService.create(productdDto);
@@ -117,12 +118,16 @@ public class ProductController {
 	}
 	
 	
-	@GetMapping("/ranking/{name}")
-    public ResponseEntity<?> getProductsOrderedByRanking(@PathVariable String name) {
+	@GetMapping("/ranking")
+    public ResponseEntity<?> getProductsOrderedByRanking(@RequestParam String name, @RequestParam String category) {
 		
         try {
         	
-            List<ProductDto> productDtos = productService.getByName(name);
+        	System.out.println("name: " + name);
+        	System.out.println("category: " + category);
+        	
+        	
+            List<ProductDto> productDtos = productService.getByNameAndCategoryOrderByScoreDescending(name, category);
             
             ProductRanking productRanking = new ProductRanking(new Date(), name, productDtos);
             

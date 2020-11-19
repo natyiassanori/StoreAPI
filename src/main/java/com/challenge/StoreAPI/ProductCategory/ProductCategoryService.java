@@ -26,9 +26,15 @@ public class ProductCategoryService {
 		
 	}
 	
-	public List<ProductCategory> getByProductCategoryDescription(String description) {
+	public List<ProductCategory> getByProductCategoriesByDescription(String description) {
 		
 		return productCategoryRepository.findByDescriptionContaining(description);
 		
 	}
+	
+	public ProductCategory getByProductCategoryByDescription(String description) {
+		
+		return productCategoryRepository.findByDescription(description);
+		
+	}	
 }

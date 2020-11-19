@@ -1,5 +1,6 @@
 package com.challenge.StoreAPI.Product;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 import com.challenge.StoreAPI.NewsPerCategory.NewsPerProductCategoryService;
 import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Product.Models.ProductDto;
+import com.challenge.StoreAPI.ProductCategory.ProductCategory;
+import com.challenge.StoreAPI.ProductCategory.ProductCategoryService;
 import com.challenge.StoreAPI.Sale.SaleService;
 
 
@@ -27,6 +30,9 @@ public class ProductService {
 	
 	@Autowired 
 	private SaleService saleService;
+	
+	@Autowired 
+	private ProductCategoryService productCategoryService;
 	
 	private ProductMapper productMapper = new ProductMapper();
 		
@@ -64,11 +70,24 @@ public class ProductService {
 		return productDtos;
 	}
 	
-	public List<ProductDto> getByNameOrderByScoreDescending(String name) {
+	
+	public List<ProductDto> getByNameAndCategoryOrderByScoreDescending(String name, String category) {
 		
-		List<ProductDto> productDtos = getByName(name);
+		List<Product> products = new ArrayList<Product>();
 		
-		productDtos.sort(Comparator.comparing(ProductDto::getScore));
+		if(category.isEmpty())
+			products = productRepository.findByNameContaining(name);
+		else {
+			
+			int producCategoryId = productCategoryService.getByProductCategoryByDescription(category).getProductCategoryId();
+			
+			products = productRepository.findByNameContainingAndProductCategoryId(name, producCategoryId);
+		}		
+		
+
+		List<ProductDto> productDtos = productMapper.ConvertProductListToProductDtoList(products);
+		
+		productDtos.sort(Comparator.comparing(ProductDto::getScore).reversed());
 		
 		return productDtos;
 	}

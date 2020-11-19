@@ -9,12 +9,15 @@ public class ProductRanking {
 	
 	String searchTerm;
 	
+	int productsCount;
+	
 	List<ProductDto> products;
 	
 	public ProductRanking(Date searchDate, String searchTerm, List<ProductDto> productDtos) {
 		this.searchDate = searchDate;
 		this.searchTerm = searchTerm;
 		this.products = productDtos;
+		this.productsCount = products.size();
 	}
 
 	public Date getSearchDate() {
@@ -39,6 +42,14 @@ public class ProductRanking {
 
 	public void setProducts(List<ProductDto> productDtos) {
 		this.products = productDtos;
+	}
+
+	public int getProductsCount() {
+		return productsCount;
+	}
+
+	public void setProductsCount(int productsCount) {
+		this.productsCount = productsCount;
 	}
 	
 	

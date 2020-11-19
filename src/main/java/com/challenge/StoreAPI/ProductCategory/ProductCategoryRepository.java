@@ -10,4 +10,6 @@ public interface ProductCategoryRepository extends JpaRepository<ProductCategory
 
 	public List<ProductCategory> findByDescriptionContaining(String name);
 	
+	public ProductCategory findByDescription(String name);
+	
 }

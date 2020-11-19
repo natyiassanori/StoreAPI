@@ -14,5 +14,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer>{
 	
 	public List<Product> findByProductCategoryId(int productCategoryId);
 	
+	public List<Product> findByNameContainingAndProductCategoryId(String name, int productCategoryId);
+	
 	public List<Product> findByScore(float score);
 }
