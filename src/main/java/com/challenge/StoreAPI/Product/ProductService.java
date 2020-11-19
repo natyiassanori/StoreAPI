@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.challenge.StoreAPI.NewsPerCategory.NewsPerProductCategoryService;
 import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Product.Models.ProductDto;
-import com.challenge.StoreAPI.ProductCategory.ProductCategory;
 import com.challenge.StoreAPI.ProductCategory.ProductCategoryService;
 import com.challenge.StoreAPI.Sale.SaleService;
 
@@ -126,15 +125,13 @@ public class ProductService {
 		
 		Product product = productMapper.convertProductDtoToProduct(productDto);
 		
+		Product existingProduct = getProductById(id);
+		
 		product.setProductId(id);
-		
-		ProductDto existingProduct = getById(id);
-		
 		product.setCreationDate(existingProduct.getCreationDate());
 		product.setScore(existingProduct.getScore());
 		
-		save(product);
-		
+		save(product);		
 	}
 	
 	
@@ -145,7 +142,9 @@ public class ProductService {
 	}
 	
 	public void delete(int id) {
+		
 		productRepository.deleteById(id);
+		
 	}		
 	
 	
@@ -154,17 +153,25 @@ public class ProductService {
 		List<Product> products = productRepository.findAll();
 		
 		for (Product product : products) {
+									
+			double score = calculateProductScore(product.getProductId(), product.getProductCategoryId());
 			
-			double ratingAverageOverThePastTwelveMonths = saleService.calculateRatingAverageOverThePastTwelveMonthsByProductId(product.getProductId());
-			
-			double salesPerProductExistenceDays = saleService.calculateSalesByProductExistingDays(product.getProductId());
-			
-			int newsCountByProductCategory = newsPerProductCategoryService.getNewsCountByProductCategoryId(product.getProductCategoryId());
-			
-			product.setScore(ratingAverageOverThePastTwelveMonths + salesPerProductExistenceDays + newsCountByProductCategory); 
+			product.setScore(score); 
 			
 			productRepository.save(product);
 		}		
+		
+	}
+	
+	public double calculateProductScore(int productId, int productCategoryId) {
+		
+		double ratingAverageOverThePastTwelveMonths = saleService.calculateRatingAverageOverThePastTwelveMonthsByProductId(productId);
+		
+		double salesPerProductExistenceDays = saleService.calculateSalesByProductExistingDays(productId);
+		
+		double newsCountByProductCategory = newsPerProductCategoryService.getNewsCountByProductCategoryId(productCategoryId);
+		
+		return ratingAverageOverThePastTwelveMonths + salesPerProductExistenceDays + newsCountByProductCategory;
 		
 	}
 	

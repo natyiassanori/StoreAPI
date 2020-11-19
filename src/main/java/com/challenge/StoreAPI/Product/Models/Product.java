@@ -32,8 +32,7 @@ public class Product {
 		
 	}
 	
-	public Product(Integer productId, String name, String description, Date creationDate, float score, int productCategoryId) {
-		this.productId = productId;
+	public Product(String name, String description, Date creationDate, double score, int productCategoryId) {
 		this.name = name;
 		this.description = description;
 		this.creationDate = creationDate;
