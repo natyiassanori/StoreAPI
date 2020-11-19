@@ -1,6 +1,8 @@
 package com.challenge.StoreAPI.Product;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -85,6 +87,22 @@ public class Product {
 
 	public void setProductCategoryoId(int productCategoryId) {
 		this.productCategoryId = productCategoryId;
-	}	
+	}		
+	
+	public long getDaysOfExistence() {
+				
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		
+		Calendar productCreation = Calendar.getInstance();
+		productCreation.setTime(creationDate);
+		productCreation.set(Calendar.HOUR_OF_DAY, 0);
+		
+		long diffInMillies = today.getTimeInMillis() - productCreation.getTimeInMillis();
+	    
+		//when a product is created on the current date, I consider it to be 1 day old. So I added 1 day, because in this case
+		//the difference between current date and product creation date is 0
+		return TimeUnit.MILLISECONDS.toDays(diffInMillies) + 1;
+	}
 	
 }

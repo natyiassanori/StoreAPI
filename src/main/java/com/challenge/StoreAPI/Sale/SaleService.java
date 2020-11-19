@@ -10,12 +10,18 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.challenge.StoreAPI.Product.Product;
+import com.challenge.StoreAPI.Product.ProductService;
+
 @Service
 @Transactional
 public class SaleService {
 
 	@Autowired
 	private SaleRepository saleRepository;
+	
+	@Autowired 
+	private ProductService productService;
 	
 	public List<Sale> findByProductId(int productId) {
 		return saleRepository.findByProductId(productId);
@@ -44,5 +50,6 @@ public class SaleService {
 		}
 		
 		return sumOfRating/salesByProductOverThePastTwelveMonths.size();			
-	}
+	}	
+	
 }
