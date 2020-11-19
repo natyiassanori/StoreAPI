@@ -10,8 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.challenge.StoreAPI.Product.Product;
 import com.challenge.StoreAPI.Product.ProductService;
+import com.challenge.StoreAPI.Product.Models.Product;
 
 @Service
 @Transactional
@@ -56,7 +56,7 @@ public class SaleService {
 		
 		List<Sale> salesByProduct = findByProductId(productId);
 		
-		Product product = productService.get(productId);
+		Product product = productService.getProductById(productId);
 	
 		long numberOfDaysTheProductExists = product.getDaysOfExistence();
 		

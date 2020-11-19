@@ -1,4 +1,4 @@
-package com.challenge.StoreAPI.Product;
+package com.challenge.StoreAPI.Product.Models;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -85,7 +85,7 @@ public class Product {
 		return productCategoryId;
 	}
 
-	public void setProductCategoryoId(int productCategoryId) {
+	public void setProductCategoryId(int productCategoryId) {
 		this.productCategoryId = productCategoryId;
 	}		
 	

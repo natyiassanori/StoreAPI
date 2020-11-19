@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.challenge.StoreAPI.Product.Product;
+import com.challenge.StoreAPI.Product.Models.Product;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProductTest {

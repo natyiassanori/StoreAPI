@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.challenge.StoreAPI.Product.Models.Product;
+import com.challenge.StoreAPI.Product.Models.ProductDto;
+
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -24,7 +27,7 @@ public class ProductController {
 	private ProductService productService;
 
 	@GetMapping("/all")
-	public List<Product> listAllProducts() {
+	public List<ProductDto> listAllProducts() {
 		
 		return productService.listAll();
 		
@@ -35,9 +38,9 @@ public class ProductController {
 		
         try {
         	
-        	Product product = productService.get(id);
+        	ProductDto productDto = productService.getById(id);
         	
-            return new ResponseEntity<Product>(product, HttpStatus.OK);
+            return new ResponseEntity<ProductDto>(productDto, HttpStatus.OK);
             
         } catch (NoSuchElementException e) {
         	
@@ -46,14 +49,14 @@ public class ProductController {
         }
     }
 	
-	@GetMapping("/name/{name}")
+	@GetMapping("/findByName/{name}")
     public ResponseEntity<?> getProductByName(@PathVariable String name) {
 		
         try {
         	
-            List<Product> products = productService.getByName(name);
+            List<ProductDto> productDtos = productService.getByName(name);
             
-            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+            return new ResponseEntity<List<ProductDto>>(productDtos, HttpStatus.OK);
             
         } catch (NoSuchElementException e) {
         	
@@ -62,14 +65,14 @@ public class ProductController {
         }
     }
 	
-	@GetMapping("/category/{category}")
+	@GetMapping("/findByCategory/{category}")
     public ResponseEntity<?> getProductByProductCategoryId(@PathVariable int category) {
 		
         try {
         	
-            List<Product> products = productService.getByProductCategoryId(category);
+            List<ProductDto> productDtos = productService.getByProductCategoryId(category);
             
-            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+            return new ResponseEntity<List<ProductDto>>(productDtos, HttpStatus.OK);
             
         } catch (NoSuchElementException e) {
         	
@@ -78,31 +81,21 @@ public class ProductController {
         }
     }
 	
-	@PostMapping("/")
-	public ResponseEntity<String> createNewProduct(@RequestBody Product product) {
+	@PostMapping("/create/")
+	public ResponseEntity<String> createNewProduct(@RequestBody ProductDto productdDto) {
 		
-		product.setCreationDate(new Date());
-		
-		productService.save(product);
+		productService.create(productdDto);
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Product successfully created");
 		
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<String> updateProduct(@RequestBody Product product, @PathVariable int id) {
+	@PutMapping("/update/{id}")
+	public ResponseEntity<String> updateProduct(@RequestBody ProductDto productdDto, @PathVariable int id) {
 		
-		try {			
-			
-			Product existProduct = productService.get(id);
-			
-			existProduct.setName(product.getName());
-			existProduct.setDescription(product.getDescription());
-			existProduct.setCreationDate(product.getCreationDate());
-			existProduct.setScore(product.getScore());
-			existProduct.setProductCategoryoId(product.getProductCategoryId());
-			
-			productService.save(existProduct);			
+		try {									
+					
+			productService.update(productdDto, id);			
 			
             return ResponseEntity.status(HttpStatus.OK).body("Product successfully updated");
             
@@ -113,7 +106,7 @@ public class ProductController {
         }
 	}
 	
-	@DeleteMapping("/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable int id) {
 		
 		productService.delete(id);
@@ -128,9 +121,9 @@ public class ProductController {
 		
         try {
         	
-            List<Product> products = productService.getByName(name);
+            List<ProductDto> productDtos = productService.getByName(name);
             
-            return new ResponseEntity<List<Product>>(products, HttpStatus.OK);
+            return new ResponseEntity<List<ProductDto>>(productDtos, HttpStatus.OK);
             
         } catch (NoSuchElementException e) {
         	

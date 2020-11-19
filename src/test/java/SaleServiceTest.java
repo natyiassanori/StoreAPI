@@ -13,8 +13,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.challenge.StoreAPI.Product.Product;
 import com.challenge.StoreAPI.Product.ProductService;
+import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Sale.Sale;
 import com.challenge.StoreAPI.Sale.SaleRepository;
 import com.challenge.StoreAPI.Sale.SaleService;
@@ -101,7 +101,7 @@ public class SaleServiceTest {
 		product.setCreationDate(dateOfYesterday);
 		
 		Mockito.when(saleService.findByProductId(1)).thenReturn(salesOfSomeProduct);
-		Mockito.when(productService.get(1)).thenReturn(product);
+		Mockito.when(productService.getProductById(1)).thenReturn(product);
 				
 		
 		double salesByProductExistenceDays = saleService.calculateSalesByProductExistingDays(1);		
@@ -125,7 +125,7 @@ public class SaleServiceTest {
 		product.setCreationDate(dateOfYesterday);
 		
 		Mockito.when(saleService.findByProductId(1)).thenReturn(salesOfSomeProduct);
-		Mockito.when(productService.get(1)).thenReturn(product);
+		Mockito.when(productService.getProductById(1)).thenReturn(product);
 				
 		
 		double salesByProductExistenceDays = saleService.calculateSalesByProductExistingDays(1);		
