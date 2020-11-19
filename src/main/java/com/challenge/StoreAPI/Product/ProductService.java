@@ -1,5 +1,6 @@
 package com.challenge.StoreAPI.Product;
 
+import java.util.Comparator;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -39,6 +40,12 @@ public class ProductService {
 	
 	public List<Product> getByName(String name) {
 		return productRepository.findByNameContaining(name);
+	}
+	
+	public List<Product> getByNameOrderByScoreDescending(String name) {
+		List<Product> products = getByName(name);
+		products.sort(Comparator.comparing(Product::getScore));
+		return products;
 	}
 	
 	public List<Product> getByProductCategoryId(int productCategoryId) {
