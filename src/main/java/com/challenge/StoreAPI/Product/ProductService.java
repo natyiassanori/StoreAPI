@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.challenge.StoreAPI.NewsPerCategory.NewsPerProductCategoryService;
 import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Product.Models.ProductDto;
+import com.challenge.StoreAPI.ProductCategory.ProductCategory;
 import com.challenge.StoreAPI.ProductCategory.ProductCategoryService;
 import com.challenge.StoreAPI.Sale.SaleService;
 

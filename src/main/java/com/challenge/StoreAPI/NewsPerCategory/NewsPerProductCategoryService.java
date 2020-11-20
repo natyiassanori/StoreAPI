@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class NewsPerProductCategoryService {
 
 	private final String BASE_URL = "https://newsapi.org/v2/top-headlines";
-	private final String API_KEY = "62f34c298f284cd7b99e201ca2eb3fec";
+	private final String API_KEY = "9666af609c0344c2af842a2f18baa693";
 	private final String COUNTRY = "us";
 		
 	@Autowired

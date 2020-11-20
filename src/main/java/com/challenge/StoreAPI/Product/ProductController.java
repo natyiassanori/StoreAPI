@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.challenge.StoreAPI.Product.Models.Product;
 import com.challenge.StoreAPI.Product.Models.ProductDto;
 import com.challenge.StoreAPI.Product.Models.ProductRanking;
+import com.challenge.StoreAPI.ProductCategory.ProductCategoryService;
+import com.challenge.StoreAPI.Sale.SaleService;
 
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,13 @@ public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private ProductCategoryService productCategoryService;
+	
+	@Autowired
+	private SaleService saleService;
+	
 
 	@GetMapping("/all")
 	public List<ProductDto> listAllProducts() {
@@ -86,20 +95,32 @@ public class ProductController {
 	@PostMapping("/create")
 	public ResponseEntity<String> createNewProduct(@RequestBody ProductDto productdDto) {
 		
-		productService.create(productdDto);
+		if(productCategoryService.existsProductCategory(productdDto.getProductCategoryId())) {
+			
+			productService.create(productdDto);
+			
+			return ResponseEntity.status(HttpStatus.OK).body("Product successfully created");
+		} else {
+			
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product Category does not exists");
+		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body("Product successfully created");
 		
 	}
 	
 	@PutMapping("/update/{id}")
 	public ResponseEntity<String> updateProduct(@RequestBody ProductDto productdDto, @PathVariable int id) {
 		
-		try {									
-					
-			productService.update(productdDto, id);			
-			
-            return ResponseEntity.status(HttpStatus.OK).body("Product successfully updated");
+		try {		
+            if (productCategoryService.existsProductCategory(productdDto.getProductCategoryId())) {
+    			
+            	productService.update(productdDto, id);			
+    			
+                return ResponseEntity.status(HttpStatus.OK).body("Product successfully updated");
+    		} else {
+    			
+    			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Product Category does not exists");
+    		}
             
         } catch (NoSuchElementException e) {      
         	
@@ -111,9 +132,21 @@ public class ProductController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<String> deleteProduct(@PathVariable int id) {
 		
-		productService.delete(id);
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Product deleted");
+		try {
+			
+			if(saleService.existsSaleByProductId(id))
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("It is not possible to delete a product that has an associated sale");
+			else {
+				productService.delete(id);
+				
+				return ResponseEntity.status(HttpStatus.OK).body("Product deleted");				
+			}
+			
+		} catch (NoSuchElementException e) {
+			
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist");
+			
+		}
 		
 	}
 	
@@ -121,11 +154,7 @@ public class ProductController {
 	@GetMapping("/ranking")
     public ResponseEntity<?> getProductsOrderedByRanking(@RequestParam String name, @RequestParam String category) {
 		
-        try {
-        	
-        	System.out.println("name: " + name);
-        	System.out.println("category: " + category);
-        	
+        try {        	
         	
             List<ProductDto> productDtos = productService.getByNameAndCategoryOrderByScoreDescending(name, category);
             

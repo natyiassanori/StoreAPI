@@ -64,4 +64,9 @@ public class SaleService {
 		
 	}
 	
+	public boolean existsSaleByProductId(int productId) {
+		
+		return saleRepository.existsByProductId(productId);
+	}
+	
 }

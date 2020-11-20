@@ -10,4 +10,6 @@ public interface SaleRepository extends JpaRepository<Sale, Integer>{
 
 	public List<Sale> findByProductId(int productId);
 	
+	public boolean existsByProductId(int productId);
+	
 }
