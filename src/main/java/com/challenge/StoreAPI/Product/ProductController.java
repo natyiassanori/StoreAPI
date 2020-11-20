@@ -158,7 +158,7 @@ public class ProductController {
         	
             List<ProductDto> productDtos = productService.getByNameAndCategoryOrderByScoreDescending(name, category);
             
-            ProductRanking productRanking = new ProductRanking(new Date(), name, productDtos);
+            ProductRanking productRanking = new ProductRanking(new Date(), name, category, productDtos);
             
             return new ResponseEntity<ProductRanking>(productRanking, HttpStatus.OK);
             

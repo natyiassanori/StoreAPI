@@ -94,7 +94,7 @@ public class NewsPerProductCategoryService {
 		
 		productService.updateProductScores();
          
-        return "ok";
+        return "news count succesfully updated";
 	}
 	
 	private String buildURL(String productCategoryDescription) {

@@ -43,4 +43,10 @@ public class ProductCategoryService {
 		return productCategoryRepository.existsById(productCategoryId);
 		
 	}	
+	
+	public boolean existsProductCategoryByName(String productCategory) {
+		
+		return productCategoryRepository.existsByDescription(productCategory);
+		
+	}
 }

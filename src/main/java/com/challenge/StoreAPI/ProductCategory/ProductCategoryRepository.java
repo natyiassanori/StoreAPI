@@ -8,8 +8,10 @@ import java.util.List;
 @Repository
 public interface ProductCategoryRepository extends JpaRepository<ProductCategory, Integer>{
 
-	public List<ProductCategory> findByDescriptionContaining(String name);
+	public List<ProductCategory> findByDescriptionContaining(String description);
 	
-	public ProductCategory findByDescription(String name);
+	public ProductCategory findByDescription(String description);
+	
+	public boolean existsByDescription(String description);
 	
 }

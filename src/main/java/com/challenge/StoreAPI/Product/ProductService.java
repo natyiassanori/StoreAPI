@@ -76,15 +76,17 @@ public class ProductService {
 		
 		List<Product> products = new ArrayList<Product>();
 		
-		if(category.isEmpty())
+		if(category.isEmpty()) {
+			
 			products = productRepository.findByNameContaining(name);
-		else {
+		}
+		else if (productCategoryService.existsProductCategoryByName(category)){			
 			
 			int producCategoryId = productCategoryService.getByProductCategoryByDescription(category).getProductCategoryId();
-			
+				
 			products = productRepository.findByNameContainingAndProductCategoryId(name, producCategoryId);
-		}		
-		
+				
+		}				
 
 		List<ProductDto> productDtos = productMapper.ConvertProductListToProductDtoList(products);
 		

@@ -7,15 +7,18 @@ public class ProductRanking {
 
 	Date searchDate;
 	
-	String searchTerm;
+	String searchName;
+	
+	String searchCategory;
 	
 	int productsCount;
 	
 	List<ProductDto> products;
 	
-	public ProductRanking(Date searchDate, String searchTerm, List<ProductDto> productDtos) {
+	public ProductRanking(Date searchDate, String searchName, String searchCategory, List<ProductDto> productDtos) {
 		this.searchDate = searchDate;
-		this.searchTerm = searchTerm;
+		this.searchName = searchName;
+		this.searchCategory = searchCategory;
 		this.products = productDtos;
 		this.productsCount = products.size();
 	}
@@ -26,14 +29,6 @@ public class ProductRanking {
 
 	public void setSearchDate(Date searchDate) {
 		this.searchDate = searchDate;
-	}
-
-	public String getSearchTerm() {
-		return searchTerm;
-	}
-
-	public void setSearchTerm(String searchTerm) {
-		this.searchTerm = searchTerm;
 	}
 
 	public List<ProductDto> getProducts() {
@@ -51,6 +46,23 @@ public class ProductRanking {
 	public void setProductsCount(int productsCount) {
 		this.productsCount = productsCount;
 	}
+
+	public String getSearchName() {
+		return searchName;
+	}
+
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
+
+	public String getSearchCategory() {
+		return searchCategory;
+	}
+
+	public void setSearchCategory(String searchCategory) {
+		this.searchCategory = searchCategory;
+	}
+	
 	
 	
 }
